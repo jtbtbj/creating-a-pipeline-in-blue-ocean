@@ -11,10 +11,11 @@ pipeline {
       steps {
         sh '''echo $HTTP_PROXY
 npm config set progress false
-npm config set proxy http://192.168.40.1:7897
-npm config set https-proxy http://192.168.40.1:7897
+npm config delete proxy
+npm config delete https-proxy
+npm config set registry https://mirrors.cloud.tencent.com/npm/
 npm config list
-npm install --no-audit --no-fund
+npm install --no-audit --no-fund --fetch-retries=5 --fetch-retry-factor=2
 '''
       }
     }
