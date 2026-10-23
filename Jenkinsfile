@@ -11,8 +11,7 @@ pipeline {
       steps {
         sh '''echo $HTTP_PROXY
 npm config list
-npm install
-'''
+npm install --no-audit --no-fund'''
       }
     }
 
