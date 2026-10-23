@@ -13,8 +13,10 @@ pipeline {
 npm config set progress false
 npm config set proxy http://192.168.40.1:7897
 npm config set https-proxy http://192.168.40.1:7897
+npm config set registry https://registry.npmmirror.com
 npm config list
-npm install --no-audit --no-fund'''
+npm install --no-audit --no-fund
+'''
       }
     }
 
