@@ -9,7 +9,10 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        sh 'npm install'
+        sh '''echo $HTTP_PROXY
+npm config list
+npm install
+'''
       }
     }
 
