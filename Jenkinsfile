@@ -10,6 +10,8 @@ pipeline {
     stage('Build') {
       steps {
         sh '''echo $HTTP_PROXY
+npm config set proxy $HTTP_PROXY
+npm config set https-proxy $HTTPS_PROXY
 npm config list
 npm install --no-audit --no-fund'''
       }
