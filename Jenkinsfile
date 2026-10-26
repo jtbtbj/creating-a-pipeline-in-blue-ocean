@@ -9,15 +9,18 @@ pipeline {
     stage('Install') {
       steps {
         sh '''
-echo "HTTP_PROXY: $HTTP_PROXY"
-# 清理配置
+echo 'HTTP_PROXY: $HTTP_PROXY'
 npm config delete registry
 npm config delete proxy
 npm config delete https-proxy
 npm config set progress false
 rm -f ./.npmrc
-# 临时锁定官方源，不持久化写入配置文件
-NPM_CONFIG_REGISTRY=https://registry.npmjs.org/ npm install --no-audit --no-fund --fetch-retries=5 --fetch-retry-factor=2
+npm cache clean --force
+NPM_CONFIG_REGISTRY=https://registry.npmjs.org/ npm install \
+--no-audit --no-fund \
+--fetch-retries=8 \
+--fetch-retry-factor=2 \
+--fetch-timeout=600000
 '''
       }
     }
