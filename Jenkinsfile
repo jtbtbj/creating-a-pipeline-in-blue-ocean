@@ -16,11 +16,15 @@ npm config delete https-proxy
 npm config set progress false
 rm -f ./.npmrc
 npm cache clean --force
-NPM_CONFIG_REGISTRY=https://registry.npmjs.org/ npm install \
+
+NPM_CONFIG_REGISTRY=https://registry.npmjs.org/ \
+NODE_OPTIONS="--max-http-header-size=81920" \
+NPM_CONFIG_HTTP_KEEPALIVE=false \
+npm install \
 --no-audit --no-fund \
---fetch-retries=8 \
+--fetch-retries=10 \
 --fetch-retry-factor=2 \
---fetch-timeout=600000
+--fetch-timeout=900000
 '''
       }
     }
